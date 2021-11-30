@@ -1,0 +1,58 @@
+
+@font-face {
+  font-family: "Montserrat-Black";
+  src: local("Montserrat-Black"),
+    url("../assets/fonts/Montserrat-Black.ttf") format("ttf");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: "Montserrat-Black";
+  src: local("Montserrat-Black"),
+    url("../assets/fonts/Montserrat-Black.ttf") format("ttf");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: "Montserrat-Bold";
+  src: local("Montserrat-Bold"),
+    url("../assets/fonts/Montserrat-Bold.ttf") format("ttf");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: "Montserrat-ExtraBold";
+  src: local("Montserrat-ExtraBold"),
+    url("../assets/fonts/Montserrat-ExtraBold.ttf") format("ttf");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: "Montserrat-Medium";
+  src: local("Montserrat-Medium"),
+    url("../assets/fonts/Montserrat-Medium.ttf") format("ttf");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: "Montserrat-Regular";
+  src: local("Montserrat-Regular"),
+    url("../assets/fonts/Montserrat-Regular.ttf") format("ttf");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: "Montserrat-Thin";
+  src: local("Montserrat-Thin"),
+    url("../assets/fonts/Montserrat-Thin.ttf") format("ttf");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+body {
+  margin: 0;
+  font-family: Montserrat-Thin !important
+    ;
+  letter-spacing: 2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

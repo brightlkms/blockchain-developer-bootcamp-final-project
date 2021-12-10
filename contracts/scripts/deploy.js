@@ -21,7 +21,9 @@ async function main() {
   const dGrace = await aGrace.deploy(
     "Angels Grace",
     "AGRACE",
-    "https://angelsgrace.mypinata.cloud/ipfs/QmYtcfwwG6a3PBF5Fda33LxsriEym5kroPLgUkwbr1BQ3e/"
+    "https://angelsgrace.mypinata.cloud/ipfs/QmYtcfwwG6a3PBF5Fda33LxsriEym5kroPLgUkwbr1BQ3e/",
+    "0x9b48c31F96249600e7D6bcd7D09f62eDB3b9b4e3",
+    "0x4527be8f31e2ebfbef4fcaddb5a17447b27d2aef"
   );
 
   await dGrace.deployed();

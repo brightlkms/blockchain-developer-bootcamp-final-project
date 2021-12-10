@@ -5,7 +5,8 @@ import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "./Mintable.sol";
 
 interface IAngelsGrace {
 	function balanceBlessings(address _user) external view returns(uint256);
@@ -198,7 +199,7 @@ contract YieldToken is ERC20("Blessing", "BLESS") {
 	}
 
 	/// @notice Function is called when minting NFT from Angels' Grace
-    /// @param user address andf amount they have minted. These will affect rewards in yield tokens that they are supposed to get
+    /// @param _user address andf amount they have minted. These will affect rewards in yield tokens that they are supposed to get
 	function updateRewardOnMint(address _user, uint256 _amount) external {
 		require(msg.sender == address(aGraceContract), "Can't call this");
 		uint256 time = min(block.timestamp, END);
@@ -254,7 +255,7 @@ contract YieldToken is ERC20("Blessing", "BLESS") {
 	}
 
     /// @notice This fucntion is used to check how much claimable tokens is there
-    /// @param _from is user address spending Blessings and _amount indicates how many tokens
+    /// @param _user is user address spending Blessings and _amount indicates how many tokens
 	function getTotalClaimable(address _user) external view returns(uint256) {
 		uint256 time = min(block.timestamp, END);
 		uint256 pending = aGraceContract.balanceBlessings(_user).mul(BASE_RATE.mul((time.sub(lastUpdate[_user])))).div(86400);
@@ -262,7 +263,7 @@ contract YieldToken is ERC20("Blessing", "BLESS") {
 	}
 }
 
-contract AngelsGrace is ERC721Enumerable, Ownable {
+contract AngelsGrace is ERC721Enumerable, Ownable, Mintable {
     using Strings for uint256;
 
     string public baseURI;
@@ -274,8 +275,10 @@ contract AngelsGrace is ERC721Enumerable, Ownable {
     constructor(
         string memory _name,
         string memory _symbol,
-        string memory _initBaseURI
-    ) ERC721(_name, _symbol) {
+        string memory _initBaseURI,
+        address _owner,
+        address _imx
+    ) ERC721(_name, _symbol) Mintable(_owner, _imx) {
         baseURI = _initBaseURI;
     }
 
@@ -310,6 +313,22 @@ contract AngelsGrace is ERC721Enumerable, Ownable {
         yieldToken.updateRewardOnMint(msg.sender, 1);
 		balanceBlessings[msg.sender]++;
         _safeMint(_to, supply + 1);
+    }
+
+    /// @notice This function is used to mint nfts with the help of enumerable function
+    /// @param user is the address of the minter
+    /// @param id is the index of the nft minted
+    function _mintFor(
+        address user,
+        uint256 id,
+        bytes memory
+    ) internal override{
+        if (msg.sender != owner()) {
+            require(msg.value >= mintPrice, "not enough eth to summon deity");
+        }
+
+        uint256 supply = totalSupply();
+        _safeMint(user, supply + 1);
     }
 
     /// @notice This function is used to retrieve current URI that stores metadata of the token 

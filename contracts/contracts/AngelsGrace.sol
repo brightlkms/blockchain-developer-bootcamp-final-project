@@ -198,7 +198,7 @@ contract YieldToken is ERC20("Blessing", "BLESS") {
 	}
 
 	/// @notice Function is called when minting NFT from Angels' Grace
-    /// @param user address andf amount they have minted. These will affect rewards in yield tokens that they are supposed to get
+    /// @param _user address andf amount they have minted. These will affect rewards in yield tokens that they are supposed to get
 	function updateRewardOnMint(address _user, uint256 _amount) external {
 		require(msg.sender == address(aGraceContract), "Can't call this");
 		uint256 time = min(block.timestamp, END);
@@ -254,7 +254,7 @@ contract YieldToken is ERC20("Blessing", "BLESS") {
 	}
 
     /// @notice This fucntion is used to check how much claimable tokens is there
-    /// @param _from is user address spending Blessings and _amount indicates how many tokens
+    /// @param _user is user address spending Blessings and _amount indicates how many tokens
 	function getTotalClaimable(address _user) external view returns(uint256) {
 		uint256 time = min(block.timestamp, END);
 		uint256 pending = aGraceContract.balanceBlessings(_user).mul(BASE_RATE.mul((time.sub(lastUpdate[_user])))).div(86400);
